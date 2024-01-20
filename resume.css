@@ -13,6 +13,7 @@ body
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    transition: background-color 0.5s;
 
 }
 .container
@@ -30,8 +31,9 @@ box-shadow: 0 35px 55px rgba(0,0,0,0.1) ;
 .container .left_Side
 {
     position: relative;
-    background: #3f2163;
+    background: #856aa5;
     padding: 40px;
+    
 }
 .profiletext
 {
@@ -185,4 +187,9 @@ p
 {
     color: #382a37;
 
+}
+#changeColors {
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
 }
