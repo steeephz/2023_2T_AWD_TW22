@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBDES TSA CALC</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #789ac0;
+        }
+        
+        #calculator {
+            text-align: center;
+            padding: 40px;
+            border: 5px solid #af9cb1;
+            border-radius: 6px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        button {
+            align-items: center;
+            appearance: none;
+            background-clip: padding-box;
+            background-color: initial;
+            background-image: none;
+            border-style: none;
+            box-sizing: border-box;
+            color: #866475;
+            cursor: pointer;
+            display: inline-block;
+            flex-direction: row;
+            flex-shrink: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            justify-content: center;
+            line-height: 24px;
+            margin: 0;
+            min-height: 64px;
+            outline: none;
+            overflow: visible;
+            padding: 19px 26px;
+            pointer-events: auto;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            width: auto;
+            word-break: keep-all;
+            z-index: 0;
+        }
+        
+        @media (min-width: 768px) {
+            button {
+                padding: 19px 32px;
+            }
+        }
+        
+        button:before,
+        button:after {
+            border-radius: 80px;
+        }
+        
+        button:before {
+            background-color: #ead5c6;
+            content: "";
+            display: block;
+            height: 100%;
+            left: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: -2;
+        }
+        
+        button:after {
+            background-color: initial;
+            background-image: linear-gradient(92.83deg, #b7bdc9 0, #92b3d7 100%);
+            bottom: 4px;
+            content: "";
+            display: block;
+            left: 4px;
+            overflow: hidden;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            transition: all 100ms ease-out;
+            z-index: -1;
+        }
+        
+        button:hover:not(:disabled):after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            transition-timing-function: ease-in;
+        }
+        
+        button:active:not(:disabled) {
+            color: #ccc;
+        }
+        
+        button:active:not(:disabled):after {
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            top: 4px;
+        }
+        
+        button:disabled {
+            cursor: default;
+            opacity: .24;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <br>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="performOperation('+')">+</button>
+        <br>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="performOperation('-')">-</button>
+        <br>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="performOperation('*')">*</button>
+        <br>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="calculateResult()">=</button>
+        <button onclick="performOperation('/')">/</button>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let currentOperation = '';
+        let memory = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            updateDisplay();
+        }
+
+        function performOperation(operation) {
+            if (currentInput !== '') {
+                if (memory !== '') {
+                    calculateResult();
+                }
+                currentOperation = operation;
+                memory = currentInput;
+                currentInput = '';
+                updateDisplay();
+            }
+        }
+
+        function calculateResult() {
+            if (currentInput !== '' && memory !== '') {
+                let result;
+                const num1 = parseFloat(memory);
+                const num2 = parseFloat(currentInput);
+                switch (currentOperation) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num1 / num2;
+                        break;
+                }
+                currentInput = result.toString();
+                currentOperation = '';
+                memory = '';
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            currentOperation = '';
+            memory = '';
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('display').value = currentInput;
+        }
+    </script>
+
+</body>
+
+</html>

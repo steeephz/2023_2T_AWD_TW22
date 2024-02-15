@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(255, 255, 255);
+        }
+        
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            /* Updated to vertical layout */
+            align-items: center;
+            /* Center items horizontally */
+        }
+        
+        .box {
+            width: 250px;
+            /* Updated width */
+            height: 250px;
+            /* Updated height */
+            margin: 20px;
+            /* Added margin for spacing between boxes */
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            border-radius: 10px;
+        }
+        
+        button {
+            border-radius: 13px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
+            color: black;
+            cursor: pointer;
+            display: inline-block;
+            font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+            padding: 10px 20px;
+            /* Updated padding for better spacing */
+            margin-bottom: 10px;
+            /* Added margin-bottom for space between buttons */
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            font-size: 16px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+        
+        .box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        button:hover {
+            box-shadow: rgba(138, 144, 140, 0.35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+            transform: scale(1.05) rotate(-1deg);
+        }
+        
+        .box.Monday {
+            background-color: red;
+            /* Pink */
+        }
+        
+        .box.Tuesday {
+            background-color: orange;
+            /* Green */
+        }
+        
+        .box.Wednesday {
+            background-color: yellow;
+            /* Purple */
+        }
+        
+        .box.Thursday {
+            background-color: yellowgreen;
+            /* Yellow */
+        }
+        
+        .box.Friday {
+            background-color: indigo;
+            /* Blue */
+        }
+        
+        .box.Saturday {
+            background-color: skyblue;
+            /* Pink */
+        }
+        
+        .box.Sunday {
+            background-color: peachpuff;
+            /* Red */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <button onclick="showBox('Monday')" class="Monday" style="background-color: red;">Monday</button>
+        <button onclick="showBox('Tuesday')" class="Tuesday" style="background-color: orange;">Tuesday</button>
+        <button onclick="showBox('Wednesday')" class="Wednesday" style="background-color: yellow;">Wednesday</button>
+        <button onclick="showBox('Thursday')" class="Thursday" style="background-color: greenyellow;">Thursday</button>
+        <button onclick="showBox('Friday')" class="Friday" style="background-color: blueviolet;">Friday</button>
+        <button onclick="showBox('Saturday')" class="Saturday" style="background-color: skyblue;">Saturday</button>
+        <button onclick="showBox('Sunday')" class="Sunday" style="background-color: peachpuff;">Sunday</button>
+
+        <div class="box" id="box"></div>
+    </div>
+
+    <script>
+        function showBox(day) {
+            var box = document.getElementById('box');
+            box.className = 'box ' + day;
+            box.innerHTML = day;
+            box.classList.add('show');
+
+            setTimeout(function() {
+                box.classList.remove('show');
+            }, 1000);
+        }
+    </script>
+
+</body>
+
+</html>
